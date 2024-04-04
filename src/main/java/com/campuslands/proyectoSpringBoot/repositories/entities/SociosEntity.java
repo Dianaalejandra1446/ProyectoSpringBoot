@@ -1,6 +1,7 @@
 package com.campuslands.proyectoSpringBoot.repositories.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,8 +26,8 @@ public class SociosEntity {
     private Long id;
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @Column(name = "id_datos_personale")
-    DatosPersonalesEntity id_DatosPersonales;
+    @Column(name = "id_datos_personales")
+    List<DatosPersonalesEntity> id_DatosPersonales;
     private Double cuentaBancaria;
     @Column(name = "fecha_pago")
     @JsonFormat(pattern = "yyyy-MM-dd")
