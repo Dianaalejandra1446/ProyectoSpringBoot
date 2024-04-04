@@ -2,6 +2,7 @@ package com.campuslands.proyectoSpringBoot.repositories.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +14,13 @@ import jakarta.persistence.Table;
 public class EnvioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_envio;
-    private Double codigo_envio;
-    private String nombre_refugio;
+    @Column(name = "id_envio")
+    private Long idEnvio;
+    @Column(name = "codigo_envio" )
+    private Double codigoEnvio;
+    @Column(name = "nombre_refugio")
+    private String nombreRefugio;
     private String destino;
-    private Date fecha_salida;
+    @Column(name = "fecha_salida")
+    private Date fechaSalida;
 }

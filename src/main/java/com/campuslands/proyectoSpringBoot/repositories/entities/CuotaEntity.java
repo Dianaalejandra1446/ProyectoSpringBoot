@@ -14,7 +14,8 @@ import lombok.Data;
 public class CuotaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_cuota")
+    private Long idCuota;
     private String tipo;
     @Column(nullable = false)
     private Integer valor;

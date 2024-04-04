@@ -5,7 +5,11 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -13,13 +17,18 @@ import lombok.Data;
 @Table(name = "Envio_ayuda_humanitaria")
 @Data
 public class EnvioAyudaHumanitariaEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ayuda_humanitaria")
     private Long idAyudaHumanitaria;
+
     @Column(name = "num_voluntarios")
     private Integer numVoluntarios;
-    @ManyToOne(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
+
+    @OneToMany(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
     @Column(name = "id_voluntarios")
     List<VoluntariadosEntity> idVoluntariados;
+
     @ManyToOne(targetEntity = EnvioSedesEntity.class , cascade = CascadeType.ALL)
     @Column(name = "id_envio_sede")
     private EnvioSedesEntity idEnvioSedesEntity;

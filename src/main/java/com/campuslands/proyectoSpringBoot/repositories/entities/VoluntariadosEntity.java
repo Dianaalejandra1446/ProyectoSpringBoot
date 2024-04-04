@@ -27,9 +27,11 @@ public class VoluntariadosEntity {
     // Agregar Relacion con sede
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    DatosPersonalesEntity id_DatosPersonales;
+    @Column(name = "id_datos_personales")
+    DatosPersonalesEntity idDatosPersonales;
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @ManyToOne()
-    SedesEntity id_sede;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(name = "id_sede")
+    SedesEntity idsede;
 
 }

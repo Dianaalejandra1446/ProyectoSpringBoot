@@ -15,7 +15,8 @@ import lombok.Data;
 public class DatosPersonalesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_datos;
+    @Column(name = "id_datos")
+    private Long idDatos;
     private String nombre;
     private String apellido;
     private Double documento;
