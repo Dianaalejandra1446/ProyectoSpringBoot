@@ -20,10 +20,7 @@ public class EnvioAyudaHumanitariaEntity {
     @ManyToOne(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
     @Column(name = "id_voluntarios")
     List<VoluntariadosEntity> idVoluntariados;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "id_sedes")
-    List<SedesEntity> idSedes;
-    //
-    @Column(name = "id_envio")
-    List<EnvioEntity> idEnvio;
+    @ManyToOne(targetEntity = EnvioSedesEntity.class , cascade = CascadeType.ALL)
+    @Column(name = "id_envio_sede")
+    private EnvioSedesEntity idEnvioSedesEntity;
 }
