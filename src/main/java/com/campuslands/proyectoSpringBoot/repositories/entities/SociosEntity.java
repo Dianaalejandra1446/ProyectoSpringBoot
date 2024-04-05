@@ -34,5 +34,5 @@ public class SociosEntity {
     private Date FechaPago;
     @ManyToOne(targetEntity = CuotaEntity.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Column(name = "id_tipo_cuota")
-    private CuotaEntity id_cuota;
+    private List<CuotaEntity> id_cuota;
 }
