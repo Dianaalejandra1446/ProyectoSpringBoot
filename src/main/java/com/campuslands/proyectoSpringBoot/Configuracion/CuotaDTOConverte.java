@@ -8,12 +8,12 @@ import com.campuslands.proyectoSpringBoot.Dto.CuotaDTO;
 import com.campuslands.proyectoSpringBoot.repositories.entities.CuotaEntity;
 
 @Component
-public class CuotaDTOConvertir {
+public class CuotaDTOConverte {
     @Autowired
     private ModelMapper dbm;
 
     public CuotaDTO converCuotaDTO(CuotaEntity cuota){
-        return null;
-        //Terminar
+        CuotaDTO cuotaDTO=dbm.map(cuota, CuotaDTO.class);
+        return cuotaDTO;
     }
 }
