@@ -29,11 +29,11 @@ public class EnvioAyudaHumanitariaEntity {
     @Column(name = "num_voluntarios")
     private Integer numVoluntarios;
 
-    @OneToMany(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
     @Column(name = "id_voluntarios")
+    @OneToMany(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
     List<VoluntariadosEntity> idVoluntariados;
 
-    @ManyToOne(targetEntity = EnvioSedesEntity.class , cascade = CascadeType.ALL)
     @Column(name = "id_envio_sede")
+    @ManyToOne(targetEntity = EnvioSedesEntity.class , cascade = CascadeType.ALL)
     private EnvioSedesEntity idEnvioSedesEntity;
 }

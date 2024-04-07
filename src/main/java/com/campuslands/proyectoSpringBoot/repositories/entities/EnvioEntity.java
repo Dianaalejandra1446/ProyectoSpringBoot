@@ -27,6 +27,7 @@ public class EnvioEntity {
     @Column(name = "nombre_refugio")
     private String nombreRefugio;
     private String destino;
+    
     @Column(name = "fecha_salida")
     private Date fechaSalida;
 }

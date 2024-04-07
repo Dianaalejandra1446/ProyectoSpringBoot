@@ -20,8 +20,8 @@ public class EnvioAlimentosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_envio_alimentos")
     private Long idEnvioAlimentos;
-    @Column(name = "nombre_productos")
+    @Column(name = "nombre_producto")
     private String nombreProducto;
     @Column(name = "num_toneladas")
-    private Integer numToneladas;
+    private Double numToneladas;
 }

@@ -1,9 +1,11 @@
 package com.campuslands.proyectoSpringBoot.repositories.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +24,6 @@ public class SedesEntity {
     private String ciudad;
     private String domicilio;
     private String nombre_director;
+    @OneToMany(cascade = CascadeType.ALL)
+    private SociosEntity id_socios;
 }

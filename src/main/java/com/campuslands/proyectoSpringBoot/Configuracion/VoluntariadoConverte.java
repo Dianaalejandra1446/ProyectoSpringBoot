@@ -17,7 +17,7 @@ public class VoluntariadoConverte {
 
     public VoluntariadosDTO voluntariadosDTO (VoluntariadosEntity voluntariadosEntity){
         VoluntariadosDTO voluntariadosDTO = dbm.map(voluntariadosEntity, VoluntariadosDTO.class);
-        voluntariadosDTO.setIdVoluntariados(voluntariadosEntity.getId());
+        voluntariadosDTO.setIdVoluntariados(voluntariadosEntity.getId_voluntariado());
         voluntariadosDTO.setTipo(voluntariadosEntity.getTipo());
         voluntariadosDTO.setProfesion(voluntariadosEntity.getProfesion());
         voluntariadosDTO.setDisponiblidad(voluntariadosEntity.getDisponiblidad());

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class VoluntariadosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_voluntariado;
     private String tipo;
     private String profesion;
     @Column(nullable = false)

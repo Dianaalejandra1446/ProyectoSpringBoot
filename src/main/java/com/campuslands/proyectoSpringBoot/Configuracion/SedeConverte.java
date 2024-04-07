@@ -23,6 +23,7 @@ public class SedeConverte {
         sedesDTO.setCiudad(sedes.getCiudad());
         sedesDTO.setDomicilio(sedes.getDomicilio());
         sedesDTO.setNombre_director(sedes.getNombre_director());
+        sedesDTO.setIdSocio(sedes.getId_socios().getId());
 
         return sedesDTO;
     }

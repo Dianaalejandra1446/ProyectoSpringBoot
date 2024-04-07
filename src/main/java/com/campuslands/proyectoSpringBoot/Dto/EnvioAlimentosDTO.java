@@ -6,5 +6,5 @@ import lombok.Data;
 public class EnvioAlimentosDTO {
     private Long idEnvioAlimentos;
     private String nombreProducto;
-    private Integer numToneladas;
+    private Double numToneladas;
 }

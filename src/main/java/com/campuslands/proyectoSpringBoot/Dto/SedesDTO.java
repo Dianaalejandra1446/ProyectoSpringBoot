@@ -9,4 +9,5 @@ public class SedesDTO {
     private String ciudad;
     private String domicilio;
     private String nombre_director;
+    private Long idSocio;
 }

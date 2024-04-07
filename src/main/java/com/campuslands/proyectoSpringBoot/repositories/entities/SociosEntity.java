@@ -32,6 +32,7 @@ public class SociosEntity {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Column(name = "id_datos_personales")
     List<DatosPersonalesEntity> id_DatosPersonales;
+    @Column(name = "cuenta_bancaria")
     private Double cuentaBancaria;
     @Column(name = "fecha_pago")
     @JsonFormat(pattern = "yyyy-MM-dd")
