@@ -1,6 +1,5 @@
 package com.campuslands.proyectoSpringBoot.Services.Impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,78 +16,65 @@ import com.campuslands.proyectoSpringBoot.repositories.entities.CuotaEntity;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class CuotaServiceImpl implements CuotaService{
     @Autowired
     private CuotaRepository cuotaRepository;
 
     @Autowired
-    private CuotaConverte convert;
+    private CuotaConverte cuotaConvert;
 
     @Override
     @Transactional(readOnly = true)
     public List<CuotaDTO> findAll() {
-       List<CuotaEntity> cuotaEntities = (List<CuotaEntity>) cuotaRepository.findAll();
-
-       List<CuotaDTO> cuotaDTO = new ArrayList<>();
-        
-       for (CuotaEntity cuota : cuotaEntities) {
-            cuotaDTO.add(convert.converCuotaDTO(cuota));
-       }
-       return cuotaDTO;
+        List<CuotaEntity> cuotas = (List<CuotaEntity>) cuotaRepository.findAll();
+        return cuotas.stream()
+                     .map(cuota -> cuotaConvert.converCuotaDTO(cuota))
+                     .toList();
     }
 
     @Override
-    public List<CuotaDTO> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
-
-    @Override
-    public CuotaDTO save(CuotaDTO cuota) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
-    @Override
-    public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
-    public CuotaDTO update(Long id, CuotaDTO cuota) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-
-/* 
-    @Override
-    public CuotaDTO save(CuotaDTO cuota) {
-        return cuotaRepository.save(cuota);
-    }
-
-    @Override
-    public void delete(Long id) {
-        Optional<CuotaDTO> cuotaOptional=cuotaRepository.findById(id);
+    @Transactional(readOnly = true)
+    public CuotaDTO findById(Long id) {
+        Optional<CuotaEntity> cuotaOptional = cuotaRepository.findById(id);
         if (cuotaOptional.isPresent()) {
-            cuotaRepository.delete(cuotaOptional.get());
+            CuotaEntity cuotaEntity = cuotaOptional.get();
+            return cuotaConvert.converCuotaDTO(cuotaEntity);
         }
+        return null; // O puedes lanzar una excepción de recurso no encontrado aquí
+    }
+    
+    @Override
+    @Transactional
+    public CuotaDTO save(CuotaDTO cuotaDTO) {
+        CuotaEntity cuota = cuotaConvert.convertirDTOCuotaEntity(cuotaDTO);
+        cuotaRepository.save(cuota);
+        // Conversion a DTO
+        return cuotaConvert.converCuotaDTO(cuota);
+    }
+
+    @Override
+    public void delete(Long id) {
+        cuotaRepository.deleteById(id);
     }
 
     @Override
     public CuotaDTO update(Long id, CuotaDTO cuota) {
-        Optional<CuotaEntity> cuotaCurrentOptional=cuotaRepository.findById(id);
-
+        // Buscar el libro por el id
+        Optional<CuotaEntity> cuotaCurrentOptional = cuotaRepository.findById(id);
         if (cuotaCurrentOptional.isPresent()) {
-            CuotaEntity cuotaCurrent=cuotaCurrentOptional.get();
+            
+            CuotaEntity cuotaCurrent = cuotaConvert.convertirDTOCuotaEntity(cuota);
+            cuotaCurrent.setIdCuota(id);
             cuotaCurrent.setTipo(cuota.getTipo());
             cuotaCurrent.setValor(cuota.getValor());
-            return cuotaCurrent;
+
+            cuotaRepository.save(cuotaCurrent);
+
+            return cuotaConvert.converCuotaDTO(cuotaCurrent);
         }
         return null;
     }
- */
+    
 }

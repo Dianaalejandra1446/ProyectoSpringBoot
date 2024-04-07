@@ -7,7 +7,7 @@ import com.campuslands.proyectoSpringBoot.Dto.CuotaDTO;
 public interface CuotaService {
     List<CuotaDTO> findAll();
 
-    List<CuotaDTO> findById(Long id);
+    CuotaDTO findById(Long id);
 
     CuotaDTO save(CuotaDTO cuota);
 
