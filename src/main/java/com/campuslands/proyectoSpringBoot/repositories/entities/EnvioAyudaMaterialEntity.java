@@ -8,16 +8,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Envio_ayuda_humanitaria")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnvioAyudaMaterialEntity {
     private Long id_ayuda_material;
     @ManyToOne(targetEntity = EnvioSedesEntity.class,cascade = CascadeType.ALL)
     @Column(name = "id_envio_sede")
-    private List<EnvioSedesEntity>idEnvioSedesEntity;
+    private List<EnvioSedesEntity>idEnvioSedes;
     @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "id_envio_alimentos")
     private List<EnvioAlimentosEntity> idEnvioAlimentos;

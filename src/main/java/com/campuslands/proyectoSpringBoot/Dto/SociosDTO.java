@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class SociosDTO {
-    private Long id;
+    private Long idSocio;
     List<DatosPersonalesDTO> datosPersonales;
     private Double cuentaBancaria;
     private Date FechaPago;

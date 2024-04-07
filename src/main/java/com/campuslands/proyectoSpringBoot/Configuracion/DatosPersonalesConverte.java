@@ -17,4 +17,15 @@ public class DatosPersonalesConverte {
         return datosPersonalesEntity;
     }
     
+    public DatosPersonalesDTO convertiPersonalesDTO(DatosPersonalesEntity datosPersonalesEntity){
+        DatosPersonalesDTO datosPersonalesDTO = dbm.map(datosPersonalesEntity,DatosPersonalesDTO.class);
+        datosPersonalesDTO.setIdDatos(datosPersonalesEntity.getIdDatos());
+        datosPersonalesDTO.setNombre(datosPersonalesEntity.getNombre());
+        datosPersonalesDTO.setApellido(datosPersonalesEntity.getApellido());
+        datosPersonalesDTO.setDocumento(datosPersonalesEntity.getDocumento());
+        datosPersonalesDTO.setEmail(datosPersonalesEntity.getEmail());
+        datosPersonalesDTO.setTelefono(datosPersonalesEntity.getTelefono());
+
+        return datosPersonalesDTO;
+    }
 }

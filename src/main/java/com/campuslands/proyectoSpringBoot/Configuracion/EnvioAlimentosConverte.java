@@ -12,7 +12,16 @@ public class EnvioAlimentosConverte {
     @Autowired
     private ModelMapper dbm;
 
+    public EnvioAlimentosEntity convertirDTOAlimentosEntity(EnvioAlimentosDTO envioAlimentosDTO){
+        return dbm.map(envioAlimentosDTO, EnvioAlimentosEntity.class);
+    }
+
     public EnvioAlimentosDTO converEnvioAlimentosDTO(EnvioAlimentosEntity envioAlimentos){
-        return dbm.map(envioAlimentos, EnvioAlimentosDTO.class);
+        EnvioAlimentosDTO envioAlimentosDTO = dbm.map(envioAlimentos, EnvioAlimentosDTO.class);
+        envioAlimentosDTO.setIdEnvioAlimentos(envioAlimentos.getIdEnvioAlimentos());
+        envioAlimentosDTO.setNombreProducto(envioAlimentos.getNombreProducto());
+        envioAlimentosDTO.setNumToneladas(envioAlimentos.getNumToneladas());
+
+        return envioAlimentosDTO;
     }
 }

@@ -8,7 +8,6 @@ public class DatosPersonalesDTO {
     private String nombre;
     private String apellido;
     private Double documento;
-    private String varchar;
     private Integer telefono;
     private String email;
 }

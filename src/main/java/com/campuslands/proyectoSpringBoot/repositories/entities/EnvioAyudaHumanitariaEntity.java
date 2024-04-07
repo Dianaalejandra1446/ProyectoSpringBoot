@@ -11,11 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Envio_ayuda_humanitaria")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnvioAyudaHumanitariaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,7 +12,16 @@ public class EnvioSedesConverte {
     @Autowired
     private ModelMapper dbm;
 
+    public EnvioSedesEntity converterSedesEntity (EnvioSedesDTO envioSedesDTO){
+        return dbm.map(envioSedesDTO, EnvioSedesEntity.class);
+    }
+
     public EnvioSedesDTO envioSedesDTO(EnvioSedesEntity envioSedesEntity){
-        return dbm.map(envioSedesEntity, EnvioSedesDTO.class);
+        EnvioSedesDTO envioSedesDTO = dbm.map(envioSedesEntity, EnvioSedesDTO.class);
+        envioSedesDTO.setIdEnvioSedes(envioSedesEntity.getIdEnvioSedes());
+        envioSedesDTO.setIdEnvio(envioSedesEntity.getIdEnvio().getIdEnvio());
+        envioSedesDTO.setIdSede(envioSedesEntity.getIdSede().getId());
+
+        return envioSedesDTO;
     }
 }

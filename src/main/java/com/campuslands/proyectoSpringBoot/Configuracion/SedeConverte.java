@@ -12,7 +12,18 @@ public class SedeConverte {
     @Autowired
     private ModelMapper dbm;
 
-    public SedesDTO sedesDTO (SedesEntity sedes){
-        return dbm.map(sedes, SedesDTO.class);
+    public SedesEntity converteSedesEntity(SedesDTO sedesDTO){
+        return dbm.map(sedesDTO, SedesEntity.class);
+    }
+
+    public SedesDTO converteSedesDTO (SedesEntity sedes){
+        SedesDTO sedesDTO = dbm.map(sedes, SedesDTO.class);
+        sedesDTO.setId(sedes.getId());
+        sedesDTO.setNombre_sede(sedes.getNombre_sede());
+        sedesDTO.setCiudad(sedes.getCiudad());
+        sedesDTO.setDomicilio(sedes.getDomicilio());
+        sedesDTO.setNombre_director(sedes.getNombre_director());
+
+        return sedesDTO;
     }
 }
