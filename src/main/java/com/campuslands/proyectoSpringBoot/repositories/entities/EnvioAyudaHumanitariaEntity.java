@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -33,7 +34,7 @@ public class EnvioAyudaHumanitariaEntity {
     @OneToMany(targetEntity = VoluntariadosEntity.class, cascade = CascadeType.ALL)
     List<VoluntariadosEntity> idVoluntariados;
 
-    @Column(name = "id_envio_sede")
-    @ManyToOne(targetEntity = EnvioSedesEntity.class , cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "id_envio_sede") // nombre de la columna en la tabla que mapea la relación
     private EnvioSedesEntity idEnvioSedesEntity;
 }

@@ -1,15 +1,16 @@
 package com.campuslands.proyectoSpringBoot.Dto;
 
 import java.util.Date;
-import java.util.List;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
 public class SociosDTO {
     private Long idSocio;
-    List<DatosPersonalesDTO> datosPersonales;
+    private DatosPersonalesDTO datosPersonales;
+    @NotEmpty(message = "no puede estar vacio")
     private Double cuentaBancaria;
     private Date FechaPago;
-    private List<CuotaDTO> datosCuota; 
+    private String tipoCuota; 
 }

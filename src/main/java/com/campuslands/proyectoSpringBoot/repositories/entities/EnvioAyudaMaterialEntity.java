@@ -5,6 +5,10 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -18,9 +22,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnvioAyudaMaterialEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_ayuda_material;
     @ManyToOne(targetEntity = EnvioSedesEntity.class,cascade = CascadeType.ALL)
-    @Column(name = "id_envio_sede")
+    @JoinColumn(name = "id_envio_sede")
     private List<EnvioSedesEntity>idEnvioSedes;
     @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "id_envio_alimentos")
