@@ -4,9 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.campuslands.proyectoSpringBoot.Dto.EnvioDTO;
 import com.campuslands.proyectoSpringBoot.Dto.EnvioMedicamentoDTO;
-import com.campuslands.proyectoSpringBoot.repositories.entities.EnvioEntity;
 import com.campuslands.proyectoSpringBoot.repositories.entities.EnvioMedicamentosEntity;
 
 @Component
@@ -14,8 +12,8 @@ public class EnvioMedicamentoConverte {
     @Autowired
     private ModelMapper dbm;
 
-    public EnvioEntity converteEnvioEntity (EnvioDTO envio){
-        return dbm.map(envio, EnvioEntity.class);
+    public EnvioMedicamentosEntity converteEnvioMedicamentosEntity (EnvioMedicamentoDTO envioEnvioMedicamento){
+        return dbm.map(envioEnvioMedicamento, EnvioMedicamentosEntity.class);
     }
 
     public EnvioMedicamentoDTO converteEnvioMedicamentoDTO (EnvioMedicamentosEntity envioMedicamentos){
