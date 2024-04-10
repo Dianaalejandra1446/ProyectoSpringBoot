@@ -20,48 +20,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.campuslands.proyectoSpringBoot.Dto.DatosPersonalesDTO;
-import com.campuslands.proyectoSpringBoot.Services.DatosPersonalesService;
+import com.campuslands.proyectoSpringBoot.Dto.VoluntariadosDTO;
+import com.campuslands.proyectoSpringBoot.Services.VoluntariadoService;
 
 @RestController
-@RequestMapping("/datos-personales")
-public class DatosPersonalesController {
+@RequestMapping("/voluntariados")
+public class VoluntariadosController {
     @Autowired
-    private DatosPersonalesService datosPersonalesService;
+    private VoluntariadoService voluntariadoService;
 
-    @GetMapping("/ver-datos-personales")
-    public List<DatosPersonalesDTO> findAll(){
-        return datosPersonalesService.findAll();
+    @GetMapping("/ver-voluntarios")
+    public List<VoluntariadosDTO> findAll(){
+        return voluntariadoService.findAll();
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<DatosPersonalesDTO> findById(@PathVariable Long id){
-        DatosPersonalesDTO datos = datosPersonalesService.findById(id);
-        if (datos != null) {
-            return new ResponseEntity<>(datos, HttpStatus.OK);
+    public ResponseEntity<VoluntariadosDTO> findById(@PathVariable Long id){
+        VoluntariadosDTO voluntariados = voluntariadoService.findById(id);
+        if (voluntariados != null) {
+            return new ResponseEntity<>(voluntariados, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        }        
     }
-    
-    @PostMapping("/agregar-datos-personales")
-    public DatosPersonalesDTO save(@RequestBody DatosPersonalesDTO datosPersonales){
-        return datosPersonalesService.save(datosPersonales);
+
+    @PostMapping("/agregar-voluntario")
+    public VoluntariadosDTO save(@RequestBody VoluntariadosDTO voluntariados){
+        return voluntariadoService.save(voluntariados);
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete (@PathVariable Long id){
         try {
-            datosPersonalesService.delete(id);
+            voluntariadoService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id, @Validated @RequestBody DatosPersonalesDTO datosPersonalesDTO, BindingResult result){
-
+    @PutMapping("{id}")
+    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id, @Validated @RequestBody VoluntariadosDTO voluntariadosDTO,BindingResult result){
         Map<String,Object> response = new HashMap<>();
         try {
             if (result.hasErrors()) {
@@ -72,15 +71,16 @@ public class DatosPersonalesController {
                 response.put("errors", errors);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);        
             }
-            DatosPersonalesDTO datosUpdate = datosPersonalesService.update(id, datosPersonalesDTO);
-          
+            VoluntariadosDTO voluntariadosUpdate = voluntariadoService.update(id, voluntariadosDTO);
+
             response.put("mensaje", "Los datos personales han sido actualizados con éxito");
-            response.put("datos_personales", datosUpdate);
+            response.put("voluntariados", voluntariadosUpdate);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (DataAccessException e) {
-            response.put("mensaje", "Error al realizar el update en la base de datos");
-            response.put("error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+    } catch (DataAccessException e) {
+        response.put("mensaje", "Error al realizar el update en la base de datos");
+        response.put("error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
 }

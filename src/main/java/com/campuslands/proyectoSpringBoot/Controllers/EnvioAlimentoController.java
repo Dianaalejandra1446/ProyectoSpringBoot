@@ -15,54 +15,54 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.campuslands.proyectoSpringBoot.Dto.DatosPersonalesDTO;
-import com.campuslands.proyectoSpringBoot.Services.DatosPersonalesService;
+import com.campuslands.proyectoSpringBoot.Dto.EnvioAlimentosDTO;
+import com.campuslands.proyectoSpringBoot.Services.EnvioAlimentoService;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 @RestController
-@RequestMapping("/datos-personales")
-public class DatosPersonalesController {
+@RequestMapping("/envio-alimentos")
+public class EnvioAlimentoController {
     @Autowired
-    private DatosPersonalesService datosPersonalesService;
+    private EnvioAlimentoService envioAlimentoService;
 
-    @GetMapping("/ver-datos-personales")
-    public List<DatosPersonalesDTO> findAll(){
-        return datosPersonalesService.findAll();
+    @GetMapping("/ver-envio-alimentos")
+    public List<EnvioAlimentosDTO> findAll(){
+        return envioAlimentoService.findAll();
     }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<DatosPersonalesDTO> findById(@PathVariable Long id){
-        DatosPersonalesDTO datos = datosPersonalesService.findById(id);
-        if (datos != null) {
-            return new ResponseEntity<>(datos, HttpStatus.OK);
-        } else {
+    @GetMapping("{id}")
+    public ResponseEntity<EnvioAlimentosDTO> findById(@PathVariable long id){
+        EnvioAlimentosDTO envio = envioAlimentoService.findById(id);
+        if (envio != null) {
+            return new ResponseEntity<>(envio,HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-    @PostMapping("/agregar-datos-personales")
-    public DatosPersonalesDTO save(@RequestBody DatosPersonalesDTO datosPersonales){
-        return datosPersonalesService.save(datosPersonales);
-    }
-    
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         try {
-            datosPersonalesService.delete(id);
+            envioAlimentoService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id, @Validated @RequestBody DatosPersonalesDTO datosPersonalesDTO, BindingResult result){
+    @PostMapping("/agregar-envio")
+    public EnvioAlimentosDTO save(@RequestBody EnvioAlimentosDTO envioAlimentosDTO){
+        return envioAlimentoService.save(envioAlimentosDTO);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id,@Validated @RequestBody EnvioAlimentosDTO envioAlimentosDTO,BindingResult result){
         Map<String,Object> response = new HashMap<>();
+
         try {
             if (result.hasErrors()) {
                 List<String> errors = result.getFieldErrors()
@@ -72,10 +72,10 @@ public class DatosPersonalesController {
                 response.put("errors", errors);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);        
             }
-            DatosPersonalesDTO datosUpdate = datosPersonalesService.update(id, datosPersonalesDTO);
-          
-            response.put("mensaje", "Los datos personales han sido actualizados con éxito");
-            response.put("datos_personales", datosUpdate);
+            EnvioAlimentosDTO envioUpdate = envioAlimentoService.update(id, envioAlimentosDTO);
+
+            response.put("mensaje", "Los envios de alimentos han sido actualizados con éxito");
+            response.put("datos_personales", envioUpdate);            
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al realizar el update en la base de datos");
@@ -83,4 +83,5 @@ public class DatosPersonalesController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
 }

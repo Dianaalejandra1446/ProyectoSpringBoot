@@ -41,7 +41,6 @@ public class SociosEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date FechaPago;
 
-    @ManyToOne(targetEntity = CuotaEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToOne
     private CuotaEntity id_cuota;
 }

@@ -2,7 +2,6 @@ package com.campuslands.proyectoSpringBoot.Services;
 
 import java.util.List;
 
-import com.campuslands.proyectoSpringBoot.Dto.CuotaDTO;
 import com.campuslands.proyectoSpringBoot.Dto.SociosDTO;
 
 public interface SocioService {
@@ -16,7 +15,7 @@ public interface SocioService {
     void delete(Long id);
 
     SociosDTO update(Long id,SociosDTO cuota);  
-/*     
-    List<SociosDTO> findAllSocioByTipoCuota(CuotaDTO tipoCuota); */
+
+/*     List<SociosDTO> findByIdCuota(Long idCuota); */
 
 }

@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,39 +19,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.campuslands.proyectoSpringBoot.Dto.DatosPersonalesDTO;
-import com.campuslands.proyectoSpringBoot.Services.DatosPersonalesService;
+import com.campuslands.proyectoSpringBoot.Dto.SedesDTO;
+import com.campuslands.proyectoSpringBoot.Services.SedeService;
 
 @RestController
-@RequestMapping("/datos-personales")
-public class DatosPersonalesController {
+@RequestMapping("/sedes")
+public class SedesController {
     @Autowired
-    private DatosPersonalesService datosPersonalesService;
+    private SedeService sedeService;
 
-    @GetMapping("/ver-datos-personales")
-    public List<DatosPersonalesDTO> findAll(){
-        return datosPersonalesService.findAll();
+    @GetMapping("/ver-sedes")
+    public List<SedesDTO> findAll(){
+        return sedeService.findAll();
     }
-    
     @GetMapping("/{id}")
-    public ResponseEntity<DatosPersonalesDTO> findById(@PathVariable Long id){
-        DatosPersonalesDTO datos = datosPersonalesService.findById(id);
-        if (datos != null) {
-            return new ResponseEntity<>(datos, HttpStatus.OK);
+    public ResponseEntity<SedesDTO> findById(@PathVariable Long id){
+        SedesDTO sedes = sedeService.findById(id);
+        if (sedes != null) {
+            return new ResponseEntity<>(sedes, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-    @PostMapping("/agregar-datos-personales")
-    public DatosPersonalesDTO save(@RequestBody DatosPersonalesDTO datosPersonales){
-        return datosPersonalesService.save(datosPersonales);
-    }
-    
-    @DeleteMapping("/{id}")
+
+    @PostMapping("/agregar-sedes")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         try {
-            datosPersonalesService.delete(id);
+            sedeService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,8 +53,7 @@ public class DatosPersonalesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id, @Validated @RequestBody DatosPersonalesDTO datosPersonalesDTO, BindingResult result){
-
+    public ResponseEntity<Map<String,Object>> update(@PathVariable Long id, @Validated @RequestBody SedesDTO sedesDTO, BindingResult result){
         Map<String,Object> response = new HashMap<>();
         try {
             if (result.hasErrors()) {
@@ -72,15 +64,16 @@ public class DatosPersonalesController {
                 response.put("errors", errors);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);        
             }
-            DatosPersonalesDTO datosUpdate = datosPersonalesService.update(id, datosPersonalesDTO);
+            SedesDTO sedesUpdate = sedeService.update(id, sedesDTO);
           
-            response.put("mensaje", "Los datos personales han sido actualizados con éxito");
-            response.put("datos_personales", datosUpdate);
+            response.put("mensaje", "Las sedes han sido actualizados con éxito");
+            response.put("sedes", sedesUpdate);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al realizar el update en la base de datos");
             response.put("error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }        
 }
+

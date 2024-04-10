@@ -9,11 +9,11 @@ public interface VoluntariadoService {
 
     VoluntariadosDTO findById(Long id);
 
-    VoluntariadosDTO save(VoluntariadosDTO cuota);
+    VoluntariadosDTO save(VoluntariadosDTO voluntario);
 
     void delete(Long id);
 
-    VoluntariadosDTO update(Long id,VoluntariadosDTO cuota); 
+    VoluntariadosDTO update(Long id,VoluntariadosDTO voluntario); 
 
 /*     List<VoluntariadosDTO> findAllVoluntariadoByProfesion(VoluntariadosDTO voluntariados);
 

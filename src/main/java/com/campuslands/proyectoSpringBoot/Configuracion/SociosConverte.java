@@ -1,5 +1,8 @@
 package com.campuslands.proyectoSpringBoot.Configuracion;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,4 +40,8 @@ public class SociosConverte {
 
         return sociosDTO; 
     }
+
+/*     public List<SociosDTO> sociosDTOList(List<SociosEntity> sociosEntityList) {
+        return sociosEntityList.stream().map(this::sociosDTO).collect(Collectors.toList());
+    } */
 }
