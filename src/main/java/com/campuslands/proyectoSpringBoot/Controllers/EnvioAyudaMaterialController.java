@@ -27,7 +27,7 @@ import com.campuslands.proyectoSpringBoot.Services.EnvioAyudaMaterialService;
 
 
 @RestController
-@RequestMapping("envio-ayuda-material")
+@RequestMapping("/envio-ayuda-material")
 public class EnvioAyudaMaterialController {
     @Autowired
     private EnvioAyudaMaterialService envioAyudaMaterialService;
