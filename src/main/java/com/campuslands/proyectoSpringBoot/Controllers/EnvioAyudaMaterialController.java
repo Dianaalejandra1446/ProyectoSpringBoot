@@ -16,19 +16,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.campuslands.proyectoSpringBoot.Dto.EnvioAyudaMaterialDTO;
 import com.campuslands.proyectoSpringBoot.Services.EnvioAyudaMaterialService;
 
-import lombok.AllArgsConstructor;
+
 
 @RestController
-@AllArgsConstructor
+@RequestMapping("envio-ayuda-material")
 public class EnvioAyudaMaterialController {
     @Autowired
     private EnvioAyudaMaterialService envioAyudaMaterialService;
+
+    @GetMapping("/informe")
+    public ResponseEntity<List<EnvioAyudaMaterialDTO>> findAll() {
+        List<EnvioAyudaMaterialDTO> envios = envioAyudaMaterialService.findAll();
+        if (!envios.isEmpty()) {
+            return new ResponseEntity<>(envios, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<EnvioAyudaMaterialDTO> findById(@PathVariable long id){

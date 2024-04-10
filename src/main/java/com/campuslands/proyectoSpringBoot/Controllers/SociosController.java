@@ -72,10 +72,10 @@ public class SociosController {
             response.put("mensaje", "Los socios han sido actualizados con éxito");
             response.put("socios", sociosUpdate);
             return new ResponseEntity<>(response, HttpStatus.OK);                
-    }catch (DataAccessException e) {
-        response.put("mensaje", "Error al realizar el update en la base de datos");
-        response.put("error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al realizar el update en la base de datos");
+            response.put("error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-}
 }

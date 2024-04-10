@@ -1,6 +1,9 @@
 package com.campuslands.proyectoSpringBoot.Services.Impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +39,14 @@ public class EnvioAyudaMaterialServiceImpl implements EnvioAyudaMaterialService{
     @Autowired
     private EnvioMedicamentoConverte envioMedicamentoConverte;
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<EnvioAyudaMaterialDTO> findAll() {
+        Iterable<EnvioAyudaMaterialEntity> envios = envioAyudaMaterialRepository.findAll();
+        return StreamSupport.stream(envios.spliterator(), false)
+                .map(envioAyudaMaterialConverte::convertirEntityADTO)
+                .collect(Collectors.toList());
+    }
     @Override
     @Transactional(readOnly = true)
     public EnvioAyudaMaterialDTO findById(Long id) {

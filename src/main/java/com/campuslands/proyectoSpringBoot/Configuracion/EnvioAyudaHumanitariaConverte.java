@@ -29,14 +29,13 @@ public class EnvioAyudaHumanitariaConverte {
 
         envioAyudaHumanitariaDTO.setNumVoluntarios(envioAyudaHumanitaria.getNumVoluntarios());
 
-        if (envioAyudaHumanitaria.getIdVoluntariados() != null) {
+        if (envioAyudaHumanitaria.getIdVoluntariados() != null && !envioAyudaHumanitaria.getIdVoluntariados().isEmpty()) {
             List<String> profesiones = new ArrayList<>();
             for (VoluntariadosEntity voluntariado : envioAyudaHumanitaria.getIdVoluntariados()) {
                 // Añadimos cada profesion a la lista dto
                 profesiones.add(voluntariado.getProfesion());
             } 
-        
-        envioAyudaHumanitariaDTO.setProfesionVoluntarios(profesiones);
+            envioAyudaHumanitariaDTO.setProfesionVoluntarios(profesiones);
         }
         return envioAyudaHumanitariaDTO;
     }
