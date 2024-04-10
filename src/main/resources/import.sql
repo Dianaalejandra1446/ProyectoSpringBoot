@@ -1,3 +1,19 @@
+-- INSERTAR USUARIOS
+INSERT INTO usuario (cedula, email, pwd, fecha) VALUES (1095299291, 'dianaleja@hotmail.com', 'to_be_encoded', '2015-12-01');
+INSERT INTO usuario (cedula, email, pwd, fecha) VALUES (1005372614, 'lauragomez@example.com', 'to_be_encoded_auxiliar', '2015-12-01');
+INSERT INTO usuario (cedula, email, pwd, fecha) VALUES (1005372615, 'carlosrodriguez@example.com', 'to_be_encoded_director', '2015-12-01');
+
+-- INSERTAR ROLES
+INSERT INTO roles (role_name, description) VALUES ('ROLE_ADMIN', 'puede ver el punto de cuenta'); 
+INSERT INTO roles (role_name, description) VALUES ('ROLE_AUXILIAR', 'puede ver el punto de cuenta'); 
+INSERT INTO roles (role_name, description) VALUES ('ROLE_DIRECTOR', 'puede ver el punto de cuenta'); 
+
+-- Insertar usuarioRoles
+
+INSERT INTO usuario_roles (roles_id, usuario_id) VALUES (1, 1); 
+INSERT INTO usuario_roles (roles_id, usuario_id) VALUES (2, 2); 
+INSERT INTO usuario_roles (roles_id, usuario_id) VALUES (3, 3); 
+
 -- Inserts para la tabla 'cuota'
 INSERT INTO cuota (valor, tipo) VALUES (10, 'Mínima');
 INSERT INTO cuota (valor, tipo) VALUES (20, 'Media');
