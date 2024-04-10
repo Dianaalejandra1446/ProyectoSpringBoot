@@ -51,3 +51,99 @@ INSERT INTO envio_ayuda_humanitaria (num_voluntarios, id_ayuda_humanitaria, id_e
 -- Inserts para la tabla 'voluntarios'
 INSERT INTO voluntarios (numero_trabajos_participados, id_datos_personales, id_sede_id, disponibilidad, profesion, tipo) VALUES (5, 1, 1, 'Sí', 'Médico', 'Sanitario');
 INSERT INTO voluntarios (numero_trabajos_participados, id_datos_personales, id_sede_id, disponibilidad, profesion, tipo) VALUES (3, 2, 2, 'Sí', 'ATS', 'Sanitario');
+/*-- SQLBook: Code
+CREATE TABLE `Datos_personales`(
+    `id_datos` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(255) NOT NULL,
+    `apellido` VARCHAR(255) NOT NULL,
+    `documento` DOUBLE NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `telefono` INT
+);
+CREATE TABLE `Envio_ayuda_humanitaria`(
+    `id_ayuda_humanitaria` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `num_voluntarios` INT,
+    `id_voluntario` INT NOT NULL,
+    `id_envio_sede` INT NOT NULL
+);
+CREATE TABLE `Cuota`(
+    `id_cuota` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `tipo` VARCHAR(255),
+    `valor` INT
+);
+CREATE TABLE `Socios`(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_datos_personales` INT NOT NULL,
+    `cuenta_bancaria` DOUBLE,
+    `fecha_pago` DATE,
+    `id_cuota` INT NOT NULL
+);
+CREATE TABLE `Envio_medicamentos`(
+    `id_envio_medicamentos` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre_medicamento` VARCHAR(255) NOT NULL,
+    `num_unidades` INT NOT NULL
+);
+CREATE TABLE `Sedes`(
+    `id_sede` INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre_sede` VARCHAR(255) NOT NULL,
+    `ciudad` VARCHAR(255) NOT NULL,
+    `domicilio` VARCHAR(255) NOT NULL,
+    `nombre_director` VARCHAR(255) NOT NULL,
+    `id_socio` INT NOT NULL
+);
+CREATE TABLE `Envio`(
+    `id_envio` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `codigo_envio` INT NOT NULL,
+    `nombre_refugio` VARCHAR(255) NOT NULL,
+    `destino` VARCHAR(255),
+    `fecha_salida` DATE NOT NULL
+);
+CREATE TABLE `Envio_ayuda_material`(
+    `id_ayuda_material` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_envio_sede` INT NOT NULL,
+    `id_envio_alimentos` INT NOT NULL,
+    `id_envio_medicamento` INT NOT NULL
+);
+CREATE TABLE `Voluntariados`(
+    `id_voluntario` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `tipo` VARCHAR(255),
+    `profesion` VARCHAR(255),
+    `disponibilidad` VARCHAR(255),
+    `num_trabajos_participados` INT,
+    `id_datos_personales` INT NOT NULL,
+    `id_sede` INT NOT NULL
+);
+CREATE TABLE `Envios_Sedes`(
+    `id_envios_sede` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_envio` INT NOT NULL,
+    `id_sede` INT NOT NULL
+);
+CREATE TABLE `Envio_alimentos`(
+    `id_envio_alimentos` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre_producto` VARCHAR(255),
+    `num_toneladas` DOUBLE NOT NULL
+);
+ALTER TABLE
+    `Envio_ayuda_humanitaria` ADD CONSTRAINT `envio_ayuda_humanitaria_id_envio_sede_foreign` FOREIGN KEY(`id_envio_sede`) REFERENCES `Envios_Sedes`(`id_envios_sede`);
+ALTER TABLE
+    `Envio_ayuda_humanitaria` ADD CONSTRAINT `envio_ayuda_humanitaria_id_voluntario_foreign` FOREIGN KEY(`id_voluntario`) REFERENCES `Voluntariados`(`id_voluntario`);
+ALTER TABLE
+    `Voluntariados` ADD CONSTRAINT `voluntariados_id_sede_foreign` FOREIGN KEY(`id_sede`) REFERENCES `Sedes`(`id_sede`);
+ALTER TABLE
+    `Envios_Sedes` ADD CONSTRAINT `envios_sedes_id_sede_foreign` FOREIGN KEY(`id_sede`) REFERENCES `Sedes`(`id_sede`);
+ALTER TABLE
+    `Envio_ayuda_material` ADD CONSTRAINT `envio_ayuda_material_id_envio_alimentos_foreign` FOREIGN KEY(`id_envio_alimentos`) REFERENCES `Envio_alimentos`(`id_envio_alimentos`);
+ALTER TABLE
+    `Envios_Sedes` ADD CONSTRAINT `envios_sedes_id_envio_foreign` FOREIGN KEY(`id_envio`) REFERENCES `Envio`(`id_envio`);
+ALTER TABLE
+    `Voluntariados` ADD CONSTRAINT `voluntariados_id_datos_personales_foreign` FOREIGN KEY(`id_datos_personales`) REFERENCES `Datos_personales`(`id_datos`);
+ALTER TABLE
+    `Socios` ADD CONSTRAINT `socios_id_datos_personales_foreign` FOREIGN KEY(`id_datos_personales`) REFERENCES `Datos_personales`(`id_datos`);
+ALTER TABLE
+    `Envio_ayuda_material` ADD CONSTRAINT `envio_ayuda_material_id_envio_sede_foreign` FOREIGN KEY(`id_envio_sede`) REFERENCES `Envios_Sedes`(`id_envios_sede`);
+ALTER TABLE
+    `Envio_ayuda_material` ADD CONSTRAINT `envio_ayuda_material_id_envio_medicamento_foreign` FOREIGN KEY(`id_envio_medicamento`) REFERENCES `Envio_medicamentos`(`id_envio_medicamentos`);
+ALTER TABLE
+    `Socios` ADD CONSTRAINT `socios_id_cuota_foreign` FOREIGN KEY(`id_cuota`) REFERENCES `Cuota`(`id_cuota`);
+ALTER TABLE
+    `Sedes` ADD CONSTRAINT `sedes_id_socio_foreign` FOREIGN KEY(`id_socio`) REFERENCES `Socios`(`id`);*/
