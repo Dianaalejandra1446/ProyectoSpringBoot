@@ -52,11 +52,12 @@ public class SecurityConfig {
                 */
         http.addFilterAfter(jwtValidationFilter, BasicAuthenticationFilter.class);
         http.cors(cors -> corsConfigurationSource());
-        http.csrf(csrf -> csrf
+        http.csrf().disable();
+        /*http.csrf(csrf -> csrf
                 .csrfTokenRequestHandler(requestHandler)
                 .ignoringRequestMatchers("/authenticate","/h2-console","/usuarios/**","/ciudades/**", "/cuotas/**","/envios/**","/personas/**","/refugios/**","/sedes/**","tipoCuotas/**","/usuarios/**","/voluntarios/**","/socios/**","/materiales/**", "/envioMateriales/**")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class);
+                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class);*/
         return http.build();
     }
 
